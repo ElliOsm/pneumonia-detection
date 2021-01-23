@@ -25,9 +25,9 @@ def train_data_reader(dir):
 def data_reader_augmentation(dir):
     image_directory = dir + '/images'
     data = pd.read_csv(dir + '/train.csv')
-    #validation =
+    # validation =
 
-    dataGenerator = ImageDataGenerator(rescale=1.0/255,
+    dataGenerator = ImageDataGenerator(rescale=1.0 / 255,
                                        rotation_range=40,
                                        width_shift_range=0.20,
                                        height_shift_range=0.20,
@@ -59,4 +59,4 @@ def data_reader_augmentation(dir):
                                                             batch_size=32,
                                                             subset='validation')
 
-    return trainGenerator,validationGenerator
+    return trainGenerator, validationGenerator

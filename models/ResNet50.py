@@ -1,27 +1,28 @@
 from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dense,GlobalMaxPooling2D
 import tensorflow as tf
 
 
 def resnet50_compile():
 
 
-    pretrained_model = ResNet50(include_top=True,
+    pretrained_model = ResNet50(include_top=False,
                                 weights='imagenet',
-                                input_tensor=None,
-                                input_shape=None,
-                                pooling=None)
+                                input_shape=(224,224,3))
 
-
-    new_model = Sequential()
-    new_model.add(pretrained_model)
-    new_model.add(Dense(1, activation='sigmoid'))
+    model = Sequential()
+    model.add(pretrained_model)
+    model.add(GlobalMaxPooling2D())
+    model.add(Dense(16, activation='relu'))
+    model.add(Dense(1, activation='sigmoid'))
 
     opt = tf.keras.optimizers.Adam(learning_rate=0.0001)
 
-    new_model.compile(optimizer=opt,
+    model.compile(optimizer=opt,
                   loss=tf.keras.losses.BinaryCrossentropy(),
                   metrics=['accuracy'])
 
-    return new_model
+    model.summary()
+
+    return model
