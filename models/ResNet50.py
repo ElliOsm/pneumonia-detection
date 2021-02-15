@@ -17,7 +17,7 @@ def resnet50_compile():
     model.add(Dense(16, activation='relu'))
     model.add(Dense(1, activation='sigmoid'))
 
-    opt = tf.keras.optimizers.Adam(learning_rate=0.0001)
+    opt = tf.keras.optimizers.Adam(learning_rate=0.00001)
 
     model.compile(optimizer=opt,
                   loss=tf.keras.losses.BinaryCrossentropy(),
