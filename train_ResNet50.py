@@ -16,7 +16,7 @@ trainGenerator = data_reader_augmentation_train('data/i2a2-brasil-pneumonia-clas
 model = resnet50_compile()
 
 model.fit(trainGenerator,
-           epochs=5,
+           epochs=10,
            verbose=1,
            batch_size=32)
 
